@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [v0.4] - 2020-04-25
+
 ### Added
 
 - Added check for Symfony dump function `dd` from [@antograssiot](https://github.com/antograssiot).

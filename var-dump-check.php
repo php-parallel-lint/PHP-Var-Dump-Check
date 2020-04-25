@@ -1,7 +1,7 @@
 <?php
 use JakubOnderka\PhpVarDumpCheck;
 
-const VERSION = '0.3';
+const VERSION = '0.4';
 
 const SUCCESS = 0,
     WITH_ERRORS = 1,
