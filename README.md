@@ -13,12 +13,12 @@ Just create a `composer.json` file and run the `php composer.phar install` comma
 ```json
 {
     "require-dev": {
-        "jakub-onderka/php-var-dump-check": "~0.3"
+        "php-parallel-lint/php-var-dump-check": "~0.4"
     }
 }
 ```
 
-For colored output install suggested package `jakub-onderka/php-console-highlighter`.
+For colored output install suggested package `php-parallel-lint/php-console-highlighter`.
 
 Usage and example output
 --------------
