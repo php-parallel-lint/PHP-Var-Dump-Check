@@ -10,13 +10,13 @@ class SymfonyTest extends PHPUnit_Framework_TestCase
     public function __construct()
     {
         $settings = new PhpVarDumpCheck\Settings();
-        $settings->functionsToCheck = array_merge($settings->functionsToCheck, array(
+        $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_HANDLER,
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_DUMP,
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_DUMP_SHORTCUT,
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_DD,
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_DD_SHORTCUT,
-        ));
+        ]);
         $this->uut = new PhpVarDumpCheck\Checker($settings);
     }
 

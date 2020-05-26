@@ -10,10 +10,10 @@ class LaravelTest extends PHPUnit_Framework_TestCase
     public function __construct()
     {
         $settings = new PhpVarDumpCheck\Settings();
-        $settings->functionsToCheck = array_merge($settings->functionsToCheck, array(
+        $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
             PhpVarDumpCheck\Settings::LARAVEL_DUMP_DD,
             PhpVarDumpCheck\Settings::LARAVEL_DUMP,
-        ));
+        ]);
         $this->uut = new PhpVarDumpCheck\Checker($settings);
     }
 

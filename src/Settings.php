@@ -36,19 +36,19 @@ class Settings
      * If path contains directory, only file with these extensions are checked
      * @var array
      */
-    public $extensions = array('php', 'php3', 'php4', 'php5', 'phtml');
+    public $extensions = ['php', 'php3', 'php4', 'php5', 'phtml'];
 
     /**
      * Array of file or directories to check
      * @var array
      */
-    public $paths = array();
+    public $paths = [];
 
     /**
      * Dont't check files or directories
      * @var array
      */
-    public $excluded = array();
+    public $excluded = [];
 
     /**
      * Use colors in console output
@@ -59,11 +59,11 @@ class Settings
     /**
      * @var array
      */
-    public $functionsToCheck = array(
+    public $functionsToCheck = [
         self::VAR_DUMP,
         self::VAR_EXPORT,
         self::PRINT_R,
-    );
+    ];
 
     /**
      * @param array $arguments
@@ -144,14 +144,14 @@ class Settings
      */
     public function getFunctionCondition($method)
     {
-        $functionConditions = array(
+        $functionConditions = [
             self::VAR_DUMP => new FunctionConditions(2, false, false),
             self::PRINT_R => new FunctionConditions(2, false, false),
             self::VAR_EXPORT => new FunctionConditions(2, false, false),
             self::ZEND_DEBUG_DUMP => new FunctionConditions(3, true, true),
             self::DEBUGGER_DUMP => new FunctionConditions(2, false, false),
             self::DOCTRINE_DUMP => new FunctionConditions(2, false, false),
-        );
+        ];
 
 
         if (!isset($functionConditions[$method])) {

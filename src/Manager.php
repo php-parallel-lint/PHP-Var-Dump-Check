@@ -18,7 +18,7 @@ class Manager
         $output->setTotalFileCount($checkedFiles);
 
         /** @var Result[] $results */
-        $results = array();
+        $results = [];
 
         $startTime = microtime(true);
         $checkedFiles = 0;
@@ -121,10 +121,10 @@ class Manager
      * @return array
      * @throws Exception\NotExistsPath
      */
-    protected function getFilesFromPaths(array $paths, array $extensions, array $excluded = array())
+    protected function getFilesFromPaths(array $paths, array $extensions, array $excluded = [])
     {
         $extensions = array_flip($extensions);
-        $files = array();
+        $files = [];
 
         foreach ($paths as $path) {
             if (is_file($path)) {

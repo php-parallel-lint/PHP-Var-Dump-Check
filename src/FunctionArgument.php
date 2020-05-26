@@ -4,7 +4,7 @@ namespace JakubOnderka\PhpVarDumpCheck;
 class FunctionArgument
 {
     /** @var array */
-    protected $tokens = array();
+    protected $tokens = [];
 
     public function __construct($tokens)
     {
@@ -25,7 +25,7 @@ class FunctionArgument
                 $token = strtolower($token);
                 if ($tokenType === T_COMMENT) {
                     continue;
-                } else if ($tokenType === T_STRING && in_array($token, array('true', 'false', 'null'))) {
+                } else if ($tokenType === T_STRING && in_array($token, ['true', 'false', 'null'])) {
                     if ($token === 'true') {
                         $prediction = true;
                     } else {
@@ -50,7 +50,7 @@ class FunctionArgument
             }
         }
 
-        return array($prediction, $sure);
+        return [$prediction, $sure];
     }
 
     /**

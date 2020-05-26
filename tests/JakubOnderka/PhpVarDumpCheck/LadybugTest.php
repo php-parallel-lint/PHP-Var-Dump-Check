@@ -10,12 +10,12 @@ class LadybugTest extends PHPUnit_Framework_TestCase
     public function __construct()
     {
         $settings = new PhpVarDumpCheck\Settings();
-        $settings->functionsToCheck = array_merge($settings->functionsToCheck, array(
+        $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
             PhpVarDumpCheck\Settings::LADYBUG_DUMP,
             PhpVarDumpCheck\Settings::LADYBUG_DUMP_DIE,
             PhpVarDumpCheck\Settings::LADYBUG_DUMP_SHORTCUT,
             PhpVarDumpCheck\Settings::LADYBUG_DUMP_DIE_SHORTCUT,
-        ));
+        ]);
         $this->uut = new PhpVarDumpCheck\Checker($settings);
     }
 

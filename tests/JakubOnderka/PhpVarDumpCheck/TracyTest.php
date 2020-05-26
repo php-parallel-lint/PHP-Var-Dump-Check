@@ -10,12 +10,12 @@ class TracyTest extends PHPUnit_Framework_TestCase
     public function __construct()
     {
         $settings = new PhpVarDumpCheck\Settings();
-        $settings->functionsToCheck = array_merge($settings->functionsToCheck, array(
+        $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
             PhpVarDumpCheck\Settings::DEBUGGER_DUMP,
             PhpVarDumpCheck\Settings::DEBUGGER_DUMP_SHORTCUT,
             PhpVarDumpCheck\Settings::DEBUGGER_BARDUMP,
             PhpVarDumpCheck\Settings::DEBUGGER_BARDUMP_SHORTCUT,
-        ));
+        ]);
         $this->uut = new PhpVarDumpCheck\Checker($settings);
     }
 

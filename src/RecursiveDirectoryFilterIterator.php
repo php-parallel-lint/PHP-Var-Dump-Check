@@ -7,7 +7,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
     private $iterator;
 
     /** @var array */
-    private $excluded = array();
+    private $excluded = [];
 
     /**
      * @param \RecursiveDirectoryIterator $iterator
@@ -17,7 +17,7 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
     {
         parent::__construct($iterator);
         $this->iterator = $iterator;
-        $this->excluded = array_map(array($this, 'getPathname'), $excluded);
+        $this->excluded = array_map([$this, 'getPathname'], $excluded);
     }
 
     /**
@@ -85,6 +85,6 @@ class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
      */
     private function normalizeDirectorySeparator($file)
     {
-        return str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $file);
+        return str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $file);
     }
 }

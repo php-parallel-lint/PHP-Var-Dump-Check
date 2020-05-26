@@ -29,7 +29,7 @@ class Checker
      */
     protected function checkForDumps(array $tokens)
     {
-        $results = array();
+        $results = [];
 
         $functionsToCheck = $this->prepareFunctionCheck($this->settings->functionsToCheck);
 
@@ -116,19 +116,19 @@ class Checker
         list($ok, $arguments) = $this->checkIsFunctionCall($tokens, $from);
 
         if (!$ok) {
-            return array(false, true);
+            return [false, true];
         }
 
         if ($conditions) {
             if (isset($arguments[$conditions->getArgumentNumber() - 1])) {
                 list($isTrue, $sure) = $arguments[$conditions->getArgumentNumber() - 1]->isTrue();
-                return array($isTrue === $conditions->getMustBe(), $sure);
+                return [$isTrue === $conditions->getMustBe(), $sure];
             } else {
-                return $conditions->getMustBe() === $conditions->getDefault() ? array(true, true) : array(false, true);
+                return $conditions->getMustBe() === $conditions->getDefault() ? [true, true] : [false, true];
             }
         }
 
-        return array(true, true);
+        return [true, true];
     }
 
     /**
@@ -138,7 +138,7 @@ class Checker
      */
     protected function checkIsFunctionCall(array $tokens, $from)
     {
-        $arguments = array();
+        $arguments = [];
 
         $count = 0;
         $argumentFrom = 0;
@@ -152,7 +152,7 @@ class Checker
             } else if ($tokens[$i] === ')') {
                 if (--$count === 0) {
                     $arguments[] = new FunctionArgument(array_slice($tokens, $argumentFrom, $i - $argumentFrom));
-                    return array(true, $arguments);
+                    return [true, $arguments];
                 }
             }  else if ($tokens[$i] === ',' && $count === 1) {
                 $arguments[] = new FunctionArgument(array_slice($tokens, $argumentFrom, $i - $argumentFrom));
@@ -160,7 +160,7 @@ class Checker
             }
         }
 
-        return array(false, $arguments);
+        return [false, $arguments];
     }
 
     /**
@@ -183,7 +183,7 @@ class Checker
      */
     protected function prepareFunctionCheck(array $functionsToCheck)
     {
-        $output = array();
+        $output = [];
 
         foreach ($functionsToCheck as $function) {
             $namespaces = explode('\\', $function);
@@ -195,34 +195,34 @@ class Checker
                     list($first, $second) = explode('::', $namespace);
 
                     if (!isset($next[$first])) {
-                        $next[$first] = array();
+                        $next[$first] = [];
                     }
                     $next = &$next[$first];
 
                     if (!isset($next[T_DOUBLE_COLON])) {
-                        $next[T_DOUBLE_COLON] = array();
+                        $next[T_DOUBLE_COLON] = [];
                     }
                     $next = &$next[T_DOUBLE_COLON];
 
                     if (!isset($next[$second])) {
-                        $next[$second] = array();
+                        $next[$second] = [];
                     }
                     $next = &$next[$second];
                 } else if (!empty($namespace)) {
                     if (!isset($next[$namespace])) {
-                        $next[$namespace] = array();
+                        $next[$namespace] = [];
                     }
                     $next = &$next[$namespace];
 
                     if (isset($namespaces[$key + 1])) {
                         if (!isset($next[T_NS_SEPARATOR])) {
-                            $next[T_NS_SEPARATOR] = array();
+                            $next[T_NS_SEPARATOR] = [];
                         }
                         $next = &$next[T_NS_SEPARATOR];
                     }
                 } else {
                     if (!isset($next[T_NS_SEPARATOR])) {
-                        $next[T_NS_SEPARATOR] = array();
+                        $next[T_NS_SEPARATOR] = [];
                     }
                     $next = &$next[T_NS_SEPARATOR];
                 }
