@@ -1,8 +1,9 @@
 <?php
 
 use JakubOnderka\PhpVarDumpCheck;
+use PHPUnit\Framework\TestCase;
 
-class CheckTest extends PHPUnit_Framework_TestCase
+class CheckTest extends TestCase
 {
     protected $uut;
 
