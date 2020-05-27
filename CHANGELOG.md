@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added .gitattributes from [@reedy](https://github.com/reedy).
 
+### Internal
+
+- Replaced array syntax with short array syntax from [@peter279k](https://github.com/peter279k).
+
 ## [v0.4] - 2020-04-25
 
 ### Added
