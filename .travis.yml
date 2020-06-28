@@ -23,5 +23,5 @@ install:
 
 script:
   - ./vendor/bin/parallel-lint --exclude vendor .
-  - ./vendor/bin/phpunit --configuration phpunit.xml tests/
+  - ./vendor/bin/phpunit
   - ./var-dump-check src
