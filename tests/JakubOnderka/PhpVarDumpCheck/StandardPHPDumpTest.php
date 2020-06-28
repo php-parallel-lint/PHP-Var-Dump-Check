@@ -8,7 +8,10 @@ class StandardPHPDumpTest extends TestCase
     protected static $uut;
 
 
-    public static function setUpBeforeClass()
+    /**
+     * @beforeClass
+     */
+    public static function initializeCheckerWithSettings()
     {
         $settings = new PhpVarDumpCheck\Settings();
         self::$uut = new PhpVarDumpCheck\Checker($settings);

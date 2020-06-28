@@ -8,7 +8,10 @@ class ZendTest extends TestCase
     protected static $uut;
 
 
-    public static function setUpBeforeClass()
+    /**
+     * @beforeClass
+     */
+    public static function initializeCheckerWithSettings()
     {
         $settings = new PhpVarDumpCheck\Settings();
         $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
