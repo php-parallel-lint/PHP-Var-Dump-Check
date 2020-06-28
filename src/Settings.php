@@ -76,7 +76,7 @@ class Settings
         $setting = new self;
 
         foreach ($arguments as $argument) {
-            if ($argument{0} !== '-') {
+            if ($argument[0] !== '-') {
                 $setting->paths[] = $argument;
             } else {
                 switch ($argument) {
