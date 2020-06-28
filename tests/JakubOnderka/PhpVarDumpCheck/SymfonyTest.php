@@ -1,8 +1,9 @@
 <?php
 
 use JakubOnderka\PhpVarDumpCheck;
+use PHPUnit\Framework\TestCase;
 
-class SymfonyTest extends PHPUnit_Framework_TestCase
+class SymfonyTest extends TestCase
 {
     private $uut;
 

@@ -1,8 +1,9 @@
 <?php
 
 use JakubOnderka\PhpVarDumpCheck;
+use PHPUnit\Framework\TestCase;
 
-class CustomFunctionTest extends PHPUnit_Framework_TestCase
+class CustomFunctionTest extends TestCase
 {
 
     public function testCheck_noDebugFunction()

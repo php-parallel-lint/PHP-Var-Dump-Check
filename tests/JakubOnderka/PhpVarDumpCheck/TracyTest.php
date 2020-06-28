@@ -1,8 +1,9 @@
 <?php
 
 use JakubOnderka\PhpVarDumpCheck;
+use PHPUnit\Framework\TestCase;
 
-class TracyTest extends PHPUnit_Framework_TestCase
+class TracyTest extends TestCase
 {
     private $uut;
 

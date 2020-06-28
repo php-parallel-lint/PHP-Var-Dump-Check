@@ -1,8 +1,9 @@
 <?php
 
 use JakubOnderka\PhpVarDumpCheck;
+use PHPUnit\Framework\TestCase;
 
-class LadybugTest extends PHPUnit_Framework_TestCase
+class LadybugTest extends TestCase
 {
     private $uut;
 

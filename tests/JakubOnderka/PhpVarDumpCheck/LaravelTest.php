@@ -1,8 +1,9 @@
 <?php
 
 use JakubOnderka\PhpVarDumpCheck;
+use PHPUnit\Framework\TestCase;
 
-class LaravelTest extends PHPUnit_Framework_TestCase
+class LaravelTest extends TestCase
 {
     private $uut;
 
