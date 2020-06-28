@@ -5,17 +5,17 @@ use PHPUnit\Framework\TestCase;
 
 class LaravelTest extends TestCase
 {
-    private $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
         $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
             PhpVarDumpCheck\Settings::LARAVEL_DUMP_DD,
             PhpVarDumpCheck\Settings::LARAVEL_DUMP,
         ]);
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -25,7 +25,7 @@ class LaravelTest extends TestCase
 <?php
 dd(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -35,7 +35,7 @@ PHP;
 <?php
 dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 }

@@ -5,10 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 class SymfonyTest extends TestCase
 {
-    private $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
         $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
@@ -18,7 +18,7 @@ class SymfonyTest extends TestCase
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_DD,
             PhpVarDumpCheck\Settings::SYMFONY_VARDUMPER_DD_SHORTCUT,
         ]);
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -28,7 +28,7 @@ class SymfonyTest extends TestCase
 <?php
 VarDumper::dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -38,7 +38,7 @@ PHP;
 <?php
 VarDumper::dd(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -49,7 +49,7 @@ PHP;
 <?php
 VarDumper::setHandler(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -61,7 +61,7 @@ VarDumper::setHandler(function(\\Exception \$e){
 
 });
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -72,7 +72,7 @@ PHP;
 <?php
 dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -83,7 +83,7 @@ PHP;
 <?php
 dd(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -101,7 +101,7 @@ PHP;
 
 });
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(6, $result);
     }
 }

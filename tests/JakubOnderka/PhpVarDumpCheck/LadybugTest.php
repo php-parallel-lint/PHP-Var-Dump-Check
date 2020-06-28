@@ -5,10 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 class LadybugTest extends TestCase
 {
-    private $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
         $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
@@ -17,7 +17,7 @@ class LadybugTest extends TestCase
             PhpVarDumpCheck\Settings::LADYBUG_DUMP_SHORTCUT,
             PhpVarDumpCheck\Settings::LADYBUG_DUMP_DIE_SHORTCUT,
         ]);
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -27,7 +27,7 @@ class LadybugTest extends TestCase
 <?php
 ladybug_dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -38,7 +38,7 @@ PHP;
 <?php
 ladybug_dump_die(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -49,7 +49,7 @@ PHP;
 <?php
 ld(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -60,7 +60,7 @@ PHP;
 <?php
 ldd(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -74,7 +74,7 @@ PHP;
 \\ld('Ahoj');
 \\ldd('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(4, $result);
     }
 }

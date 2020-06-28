@@ -5,10 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 class DoctrineTest extends TestCase
 {
-    protected $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
         $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
@@ -16,7 +16,7 @@ class DoctrineTest extends TestCase
             PhpVarDumpCheck\Settings::DOCTRINE_DUMP_2,
         ]);
 
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -26,7 +26,7 @@ class DoctrineTest extends TestCase
 <?php
 Doctrine::dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -37,7 +37,7 @@ PHP;
 <?php
 Doctrine::dump(\$var, null, false);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -52,7 +52,7 @@ PHP;
 \\Doctrine\\Common\\Util\\Debug::dump(\$form);
 PHP;
 
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 }

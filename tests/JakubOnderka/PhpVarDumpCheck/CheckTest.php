@@ -5,13 +5,13 @@ use PHPUnit\Framework\TestCase;
 
 class CheckTest extends TestCase
 {
-    protected $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -21,7 +21,7 @@ class CheckTest extends TestCase
 <?php
 
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -32,7 +32,7 @@ PHP;
 <?php
 var_dump('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('var_dump', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -46,7 +46,7 @@ PHP;
 <?php
 print_r('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -60,7 +60,7 @@ PHP;
 <?php
 var_export('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('var_export', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -80,7 +80,7 @@ var_export('Ahoj');
 ?>
 var_export('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('var_export', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -95,7 +95,7 @@ PHP;
 var_export (  'Ahoj'
  ) ;
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('var_export', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -110,7 +110,7 @@ PHP;
 var_export /* v */ ( /* v */ 'Ahoj'/* v */
  ) ;
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('var_export', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -127,7 +127,7 @@ PHP;
 <?php
 print_r('Ahoj', false);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -141,7 +141,7 @@ PHP;
 <?php
 print_r('Ahoj'/**/,/**/false/**/);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -155,7 +155,7 @@ PHP;
 <?php
 print_r('Ahoj', null);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -169,7 +169,7 @@ PHP;
 <?php
 print_r('Ahoj', 0);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -183,7 +183,7 @@ PHP;
 <?php
 print_r('Ahoj', 0.0);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -197,7 +197,7 @@ PHP;
 <?php
 print_r('Ahoj', \$var = false);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -211,7 +211,7 @@ PHP;
 <?php
 OtherClass::print_r('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -223,7 +223,7 @@ PHP;
 \$object = new stdClass();
 \$object->print_r('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -241,7 +241,7 @@ class print_r {
 \$object = new print_r();
 \$object->print_r();
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
         $this->assertEquals('print_r', $result[0]->getType());
         $this->assertTrue($result[0]->isSure());
@@ -254,7 +254,7 @@ PHP;
         $content = <<<PHP
 <?php print_r('ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 }

@@ -5,10 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 class TracyTest extends TestCase
 {
-    private $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
         $settings->functionsToCheck = array_merge($settings->functionsToCheck, [
@@ -17,7 +17,7 @@ class TracyTest extends TestCase
             PhpVarDumpCheck\Settings::DEBUGGER_BARDUMP,
             PhpVarDumpCheck\Settings::DEBUGGER_BARDUMP_SHORTCUT,
         ]);
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -27,7 +27,7 @@ class TracyTest extends TestCase
 <?php
 Debugger::dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -38,7 +38,7 @@ PHP;
 <?php
 Debugger::barDump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -49,7 +49,7 @@ PHP;
 <?php
 dump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -60,7 +60,7 @@ PHP;
 <?php
 bdump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(1, $result);
     }
 
@@ -74,7 +74,7 @@ PHP;
 \\Debugger::dump(\$var);
 \\Debugger::barDump(\$var);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(4, $result);
     }
 }

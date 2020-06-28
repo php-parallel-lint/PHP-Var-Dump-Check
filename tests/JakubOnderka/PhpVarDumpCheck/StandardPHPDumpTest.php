@@ -5,13 +5,13 @@ use PHPUnit\Framework\TestCase;
 
 class StandardPHPDumpTest extends TestCase
 {
-    protected $uut;
+    protected static $uut;
 
 
-    public function __construct()
+    public static function setUpBeforeClass()
     {
         $settings = new PhpVarDumpCheck\Settings();
-        $this->uut = new PhpVarDumpCheck\Checker($settings);
+        self::$uut = new PhpVarDumpCheck\Checker($settings);
     }
 
 
@@ -21,7 +21,7 @@ class StandardPHPDumpTest extends TestCase
 <?php
 print_r('Ahoj', true);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -32,7 +32,7 @@ PHP;
 <?php
 print_r('Ahoj', TRUE);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -43,7 +43,7 @@ PHP;
 <?php
 print_r('Ahoj', 1);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -54,7 +54,7 @@ PHP;
 <?php
 print_r('Ahoj', 1.1);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -65,7 +65,7 @@ PHP;
 <?php
 print_r('Ahoj', \$var = true);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -76,7 +76,7 @@ PHP;
 <?php
 print_r('Ahoj', \$var = \$var2 =  true);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -87,7 +87,7 @@ PHP;
 <?php
 var_export('Ahoj', true);
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(0, $result);
     }
 
@@ -100,7 +100,7 @@ PHP;
 \\var_dump('Ahoj');
 \\var_export('Ahoj');
 PHP;
-        $result = $this->uut->check($content);
+        $result = self::$uut->check($content);
         $this->assertCount(3, $result);
     }
 }
