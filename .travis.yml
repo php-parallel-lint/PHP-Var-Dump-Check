@@ -13,15 +13,13 @@ matrix:
     - php: 7.3
     - php: 7.4
 
-sudo: false
-
 cache:
   directories:
     - vendor
     - $HOME/.composer/cache
 
 install:
-  - composer install --no-interaction --prefer-source
+  - composer install --no-interaction
 
 script:
   - ./vendor/bin/parallel-lint --exclude vendor .
