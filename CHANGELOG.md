@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added .gitattributes from [@reedy](https://github.com/reedy).
 
+### Fixed
+
+-  PHP 7.4: fix compatibility issue [#7](https://github.com/php-parallel-lint/PHP-Var-Dump-Check/pull/7) from [@jrfnl](https://github.com/jrfnl).
+
 ### Internal
 
 - Replaced array syntax with short array syntax from [@peter279k](https://github.com/peter279k).
