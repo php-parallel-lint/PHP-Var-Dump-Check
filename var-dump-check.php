@@ -21,6 +21,7 @@ Options:
     --symfony     Enable support for Symfony2 (dump, VarDumper::dump, VarDumper::setHandler, Vardumper::dd())
     --doctrine    Enable support for Doctrine (Doctrine::dump, \Doctrine\Common\Util\Debug::dump)
     --laravel     Enable support for Laravel (dd, dump)
+    --custom-function Comma separated custom function name(s) to check like "pre_echo". 
     --extensions  Check only files with selected extensions separated by comma
                   (default: php, php3, php4, php5, phtml)
     --exclude     Exclude directory. If you want exclude multiple directory, use

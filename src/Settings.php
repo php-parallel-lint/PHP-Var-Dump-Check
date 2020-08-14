@@ -74,6 +74,7 @@ class Settings
     {
         $arguments = new ArrayIterator(array_slice($arguments, 1));
         $setting = new self;
+        $customFunctions = array();
 
         foreach ($arguments as $argument) {
             if ($argument[0] !== '-') {
@@ -124,6 +125,10 @@ class Settings
                         $setting->functionsToCheck[] = self::LARAVEL_DUMP;
                         break;
 
+                    case '--custom-function':
+                        $customFunctions = array_map('trim', explode(',', $arguments->getNext()));
+                        break;
+
                     case '--doctrine':
                         $setting->functionsToCheck[] = self::DOCTRINE_DUMP;
                         $setting->functionsToCheck[] = self::DOCTRINE_DUMP_2;
@@ -134,7 +139,11 @@ class Settings
                 }
             }
         }
+
+        // Merge if any custom function is given
+        $setting->functionsToCheck = array_merge($setting->functionsToCheck, $customFunctions);
         $setting->functionsToCheck = array_unique($setting->functionsToCheck);
+
         return $setting;
     }
 
