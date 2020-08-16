@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added `--custom-function` parameter to check custom debug functions [#10](https://github.com/php-parallel-lint/PHP-Var-Dump-Check/pull/10) from [@umutphp](https://github.com/umutphp). 
 - Added .gitattributes from [@reedy](https://github.com/reedy).
 
 ### Fixed
