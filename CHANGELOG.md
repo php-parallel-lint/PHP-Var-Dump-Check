@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [v0.5] - 2020-08-17
+
 ### Added
 
 - Added `--custom-function` parameter to check custom debug functions [#10](https://github.com/php-parallel-lint/PHP-Var-Dump-Check/pull/10) from [@umutphp](https://github.com/umutphp). 
