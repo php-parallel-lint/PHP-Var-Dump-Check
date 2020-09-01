@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Internal
+
+- PHPUnit - Make the unit tests cross version compatible [#12](https://github.com/php-parallel-lint/PHP-Var-Dump-Check/pull/12) from [@jrfnl](https://github.com/jrfnl).
+
 ## [v0.5] - 2020-08-17
 
 ### Added
